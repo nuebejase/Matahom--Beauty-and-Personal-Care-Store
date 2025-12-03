@@ -14,7 +14,7 @@ def get_products():
             "stock": p.stock,
             "category_id": p.category_id
         } for p in products
-    ])
+    ])  
 
 
 @product_routes.route("/products", methods=["POST"])
