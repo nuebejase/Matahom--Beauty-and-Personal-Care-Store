@@ -1,0 +1,197 @@
+{
+  "project": {
+    "title": "Matahom: Beauty and Personal Care Store",
+    "description": "A web-based e-commerce platform for browsing and purchasing beauty and personal care products. Includes product catalog, inventory tracking, cart management, and admin dashboard.",
+    "version": "1.0",
+    "created_by": [
+      "Balilaon, Sherwin S.",
+      "Labanan, Markjun B.",
+      "Nantes, Stevine S.",
+      "Sedorifa, Rachel Mae",
+      "Zerrudo, Jase Karl M."
+    ],
+    "instructor": "John Louis Mercaral, MIS",
+    "date": "December 2025"
+  },
+
+  "ui": {
+    "colorTheme": {
+      "primary": "#E7B7C8",
+      "secondary": "#F5E6EE",
+      "accent": "#C2688C",
+      "success": "#75D69C",
+      "warning": "#FFC85C",
+      "danger": "#FF6978",
+      "neutralLight": "#FFFFFF",
+      "neutralDark": "#333333"
+    },
+    "typography": {
+      "titles": "Poppins, sans-serif",
+      "body": "Inter, sans-serif"
+    },
+    "layout": {
+      "responsive": true,
+      "breakpoints": {
+        "mobile": "480px",
+        "tablet": "768px",
+        "desktop": "1024px"
+      }
+    }
+  },
+
+  "database": {
+    "entities": {
+      "users": {
+        "description": "Registered individuals using the system.",
+        "attributes": {
+          "user_id": "int",
+          "name": "string",
+          "email": "string",
+          "password": "string",
+          "address": "string",
+          "role": "enum(owner, customer)",
+          "created_at": "timestamp"
+        }
+      },
+      "category": {
+        "description": "Classifications for grouping products.",
+        "attributes": {
+          "category_id": "int",
+          "name": "string",
+          "description": "string",
+          "created_at": "timestamp"
+        }
+      },
+      "product": {
+        "description": "Beauty and personal care items.",
+        "attributes": {
+          "product_id": "int",
+          "category_id": "int",
+          "name": "string",
+          "description": "string",
+          "price": "decimal(10,2)",
+          "stock": "int",
+          "image_url": "string",
+          "created_at": "timestamp"
+        }
+      },
+      "inventory": {
+        "description": "Tracks stock availability.",
+        "attributes": {
+          "inventory_id": "int",
+          "product_id": "int",
+          "quantity": "int",
+          "updated_at": "timestamp"
+        }
+      },
+      "orders": {
+        "description": "Purchase records from customers.",
+        "attributes": {
+          "order_id": "int",
+          "user_id": "int",
+          "total_amount": "decimal(10,2)",
+          "status": "enum(pending, shipped, delivered, cancelled)",
+          "shipping_address": "string",
+          "created_at": "timestamp"
+        }
+      },
+      "order_items": {
+        "description": "Products included in an order.",
+        "attributes": {
+          "order_items_id": "int",
+          "order_id": "int",
+          "product_id": "int",
+          "quantity": "int",
+          "order_price": "decimal(10,2)",
+          "subtotal": "decimal(10,2)",
+          "created_at": "timestamp"
+        }
+      }
+    },
+
+    "relationships": {
+      "users_orders": "one-to-many",
+      "orders_order_items": "one-to-many",
+      "products_order_items": "one-to-many",
+      "category_products": "one-to-many",
+      "products_inventory": "one-to-one",
+      "orders_payments": "one-to-one"
+    }
+  },
+
+  "app_features": {
+    "user": {
+      "login_signup": true,
+      "profile_management": true
+    },
+    "catalog": {
+      "search": true,
+      "filterByCategory": true,
+      "viewProductDetails": true
+    },
+    "cart": {
+      "addItem": true,
+      "removeItem": true,
+      "updateQuantity": true
+    },
+    "orders": {
+      "checkout": true,
+      "trackStatus": true,
+      "viewOrderHistory": true
+    },
+    "inventory": {
+      "autoUpdateOnPurchase": true
+    },
+    "admin": {
+      "dashboard": true,
+      "manageProducts": true,
+      "manageOrders": true,
+      "manageCategories": true,
+      "manageInventory": true
+    }
+  },
+
+  "scope": {
+    "included": [
+      "User registration & login",
+      "Product browsing, search, and filter",
+      "Shopping cart and checkout",
+      "Admin management for products, categories, orders, inventory",
+      "Responsive web design"
+    ],
+    "limitations": [
+      "Focus only on beauty and personal care items",
+      "Requires internet connection",
+      "Does not include product recommendations",
+      "Basic e-commerce features only"
+    ]
+  },
+
+  "api_structure": {
+    "users": {
+      "register": "POST /api/users/register",
+      "login": "POST /api/users/login",
+      "getProfile": "GET /api/users/:id"
+    },
+    "products": {
+      "getAll": "GET /api/products",
+      "getByCategory": "GET /api/products/category/:id",
+      "getSingle": "GET /api/products/:id"
+    },
+    "cart": {
+      "addItem": "POST /api/cart/add",
+      "removeItem": "DELETE /api/cart/remove/:id",
+      "updateItem": "PUT /api/cart/update/:id"
+    },
+    "orders": {
+      "create": "POST /api/orders",
+      "getByUser": "GET /api/orders/user/:id",
+      "updateStatus": "PUT /api/orders/status/:id"
+    },
+    "admin": {
+      "addProduct": "POST /api/admin/products",
+      "updateProduct": "PUT /api/admin/products/:id",
+      "deleteProduct": "DELETE /api/admin/products/:id"
+    }
+  }
+}

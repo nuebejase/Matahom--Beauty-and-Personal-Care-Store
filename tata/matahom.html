@@ -1,0 +1,1345 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Matahom: Beauty &amp; Personal Care Store</title><!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script><!-- Element SDK (required) -->
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+      body {
+        box-sizing: border-box;
+      }
+      /* Ensure full-iframe layout without viewport units */
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Custom scrollbars (soft, minimal) */
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #c2688c #f5e6ee;
+      }
+      *::-webkit-scrollbar {
+        width: 6px;
+      }
+      *::-webkit-scrollbar-track {
+        background: #f5e6ee;
+      }
+      *::-webkit-scrollbar-thumb {
+        background-color: #c2688c;
+        border-radius: 9999px;
+      }
+
+      /* Card shadow + smooth transitions */
+      .soft-card {
+        box-shadow: 0 10px 30px rgba(194, 104, 140, 0.08);
+      }
+      .soft-transition {
+        transition: all 200ms ease;
+      }
+
+      /* Focus outline for accessibility */
+      .focus-ring:focus-visible {
+        outline: 2px solid #c2688c;
+        outline-offset: 2px;
+      }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="w-full h-full bg-[#F5E6EE]">
+  <div id="app-root" class="w-full h-full flex flex-col">
+   <header class="w-full border-b border-[#E7B7C8]/60 bg-[#FFFFFF]/80 backdrop-blur-sm">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+     <div class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-full bg-[#E7B7C8] flex items-center justify-center soft-card" aria-hidden="true"><!-- Simple flower-like logo -->
+       <div class="relative w-5 h-5"><span class="absolute inset-0 rounded-full bg-[#FFFFFF]/80"></span> <span class="absolute inset-1 rounded-full bg-[#C2688C]/70"></span>
+       </div>
+      </div>
+      <div class="flex flex-col leading-tight"><span id="brand-title" class="font-semibold tracking-wide text-[#333333]"> Matahom </span> <span class="text-xs text-[#C2688C] uppercase tracking-[0.12em]"> Beauty &amp; Care </span>
+      </div>
+     </div>
+     <div class="hidden md:flex items-center gap-6 text-sm font-medium text-[#333333]"><button class="soft-transition focus-ring" data-nav="home" type="button"> Home </button> <button class="soft-transition focus-ring" data-nav="catalog" type="button"> Shop </button> <button class="soft-transition focus-ring" data-nav="login" type="button"> Login </button> <button class="soft-transition focus-ring" data-nav="signup" type="button"> Sign Up </button> <button class="soft-transition focus-ring" data-nav="admin" type="button"> Admin </button>
+     </div>
+     <div class="flex items-center gap-3"><button id="cart-nav-btn" type="button" class="relative rounded-full bg-[#FFFFFF] px-3 py-1.5 soft-card soft-transition flex items-center gap-2 focus-ring"> <span class="w-5 h-5 rounded-full border border-[#E7B7C8] flex items-center justify-center text-xs text-[#C2688C]" aria-hidden="true"> 🛍 </span> <span class="text-xs font-medium text-[#333333]">Cart</span> <span id="cart-count-pill" class="hidden text-[10px] font-semibold text-[#FFFFFF] bg-[#C2688C] rounded-full px-1.5 py-0.5"> 0 </span> </button>
+     </div>
+    </nav>
+   </header>
+   <main id="main-content" class="flex-1 w-full overflow-y-auto" aria-live="polite">
+    <section id="home-page" class="w-full">
+     <div class="max-w-6xl mx-auto px-4 py-8 md:py-10 grid md:grid-cols-2 gap-8 items-center"><!-- Hero copy -->
+      <div class="space-y-6">
+       <div class="inline-flex items-center gap-2 rounded-full bg-[#FFFFFF] px-3 py-1 soft-card"><span class="w-1.5 h-1.5 rounded-full bg-[#75D69C]"></span> <span class="text-[11px] tracking-[0.16em] uppercase text-[#C2688C]"> New · Soft Glow Collection </span>
+       </div>
+       <div class="space-y-3">
+        <h1 id="hero-title" class="font-semibold text-[#333333] leading-tight">Matahom</h1>
+        <p id="hero-tagline" class="text-[#333333]/80 max-w-lg">Soft, modern beauty for every day.</p>
+        <p id="hero-subtitle" class="text-sm text-[#333333]/70 max-w-md">Curated essentials for glowing, effortless looks.</p>
+       </div>
+       <div class="flex flex-wrap gap-3 items-center"><button id="home-cta-btn" type="button" class="inline-flex items-center justify-center rounded-full px-5 py-2.5 soft-card soft-transition text-sm font-medium focus-ring"> <span id="home-cta-text">Shop New Arrivals</span> <span class="ml-2 text-xs" aria-hidden="true">➝</span> </button> <button type="button" data-nav="catalog" class="inline-flex items-center justify-center rounded-full border border-[#C2688C]/30 px-4 py-2 text-xs font-medium text-[#333333] bg-[#FFFFFF]/60 soft-transition focus-ring"> Browse all beauty </button>
+       </div><!-- Category chips -->
+       <div class="flex flex-wrap gap-2 pt-2 text-[11px]"><span class="inline-flex items-center gap-1 rounded-full bg-[#FFFFFF]/80 px-3 py-1 soft-card text-[#333333]"> <span class="w-5 h-5 bg-[#E7B7C8] rounded-full flex items-center justify-center text-xs">💄</span> Lip Tints </span> <span class="inline-flex items-center gap-1 rounded-full bg-[#FFFFFF]/80 px-3 py-1 soft-card text-[#333333]"> <span class="w-5 h-5 bg-[#E7B7C8] rounded-full flex items-center justify-center text-xs">✨</span> Skin Prep </span> <span class="inline-flex items-center gap-1 rounded-full bg-[#FFFFFF]/80 px-3 py-1 soft-card text-[#333333]"> <span class="w-5 h-5 bg-[#E7B7C8] rounded-full flex items-center justify-center text-xs">🧴</span> Body Care </span>
+       </div>
+      </div><!-- Hero visual: abstract product shelf -->
+      <div class="relative h-full min-h-[260px] md:min-h-[320px] flex items-center justify-center">
+       <div class="relative w-full max-w-sm rounded-3xl bg-[#F5E6EE] soft-card overflow-hidden px-5 py-6">
+        <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[#E7B7C8]/60"></div>
+        <div class="absolute -bottom-12 -left-10 w-36 h-36 rounded-full bg-[#C2688C]/10"></div>
+        <div class="relative space-y-5">
+         <h2 class="text-xs tracking-[0.18em] uppercase text-[#C2688C]">Soft Essentials</h2>
+         <div class="grid grid-cols-3 gap-3"><!-- Placeholder product blocks -->
+          <div class="rounded-2xl bg-[#FFFFFF]/90 p-3 flex flex-col items-center justify-between soft-card">
+           <div class="w-12 h-16 rounded-2xl bg-[#E7B7C8] mb-2"></div><span class="text-[11px] text-center text-[#333333]">Tinted Balm</span>
+          </div>
+          <div class="rounded-2xl bg-[#FFFFFF]/90 p-3 flex flex-col items-center justify-between soft-card">
+           <div class="w-10 h-16 rounded-3xl bg-[#F5E6EE] border border-[#E7B7C8]"></div><span class="text-[11px] text-center text-[#333333]">Serum</span>
+          </div>
+          <div class="rounded-2xl bg-[#FFFFFF]/90 p-3 flex flex-col items-center justify-between soft-card">
+           <div class="w-12 h-12 rounded-full bg-[#C2688C]/40"></div><span class="text-[11px] text-center text-[#333333]">Glow Pot</span>
+          </div>
+         </div>
+         <div class="rounded-2xl bg-[#FFFFFF]/85 px-3 py-2 flex items-center justify-between soft-card">
+          <div>
+           <p class="text-[11px] font-medium text-[#333333]">Free shipping</p>
+           <p class="text-[10px] text-[#333333]/70">On orders over ₱1,500</p>
+          </div>
+          <div class="flex items-center gap-1 text-[10px] text-[#75D69C]"><span class="w-4 h-4 rounded-full bg-[#75D69C]/20 flex items-center justify-center"> ✓ </span> Trusted beauty
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Featured products & categories -->
+     <div class="max-w-6xl mx-auto px-4 pb-10 space-y-10"><!-- Featured row -->
+      <section aria-labelledby="featured-title">
+       <div class="flex items-center justify-between mb-4">
+        <h2 id="featured-title" class="text-sm font-semibold tracking-[0.18em] uppercase text-[#333333]">Featured</h2><button data-nav="catalog" type="button" class="text-xs text-[#C2688C] underline-offset-4 hover:underline soft-transition focus-ring"> View all products </button>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4"><!-- Product cards are generated via JS for consistency -->
+        <div id="featured-products" class="contents"></div>
+       </div>
+      </section><!-- Categories -->
+      <section aria-labelledby="categories-title">
+       <div class="flex items-center justify-between mb-4">
+        <h2 id="categories-title" class="text-sm font-semibold tracking-[0.18em] uppercase text-[#333333]">Shop by mood</h2>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <article class="rounded-3xl bg-[#FFFFFF] p-4 soft-card soft-transition hover:-translate-y-0.5">
+         <h3 class="text-xs font-semibold text-[#333333] mb-1">Everyday Glow</h3>
+         <p class="text-[11px] text-[#333333]/80 mb-3">Skin-first formulas that feel like skincare, look like soft-focus makeup.</p><button type="button" data-filter-category="Skin Care" class="inline-flex items-center text-[11px] text-[#C2688C] focus-ring"> Explore skin prep <span class="ml-1 text-xs">↗</span> </button>
+        </article>
+        <article class="rounded-3xl bg-[#FFFFFF] p-4 soft-card soft-transition hover:-translate-y-0.5">
+         <h3 class="text-xs font-semibold text-[#333333] mb-1">Lip &amp; Cheek</h3>
+         <p class="text-[11px] text-[#333333]/80 mb-3">Multi-use tints that blend like a dream and last all day.</p><button type="button" data-filter-category="Makeup" class="inline-flex items-center text-[11px] text-[#C2688C] focus-ring"> Shop tints <span class="ml-1 text-xs">↗</span> </button>
+        </article>
+        <article class="rounded-3xl bg-[#FFFFFF] p-4 soft-card soft-transition hover:-translate-y-0.5">
+         <h3 class="text-xs font-semibold text-[#333333] mb-1">Body Rituals</h3>
+         <p class="text-[11px] text-[#333333]/80 mb-3">Creamy washes and lotions for soft, cared-for skin from head to toe.</p><button type="button" data-filter-category="Body Care" class="inline-flex items-center text-[11px] text-[#C2688C] focus-ring"> Discover body care <span class="ml-1 text-xs">↗</span> </button>
+        </article>
+       </div>
+      </section>
+     </div>
+    </section><!-- Catalog Page -->
+    <section id="catalog-page" class="hidden w-full" aria-labelledby="catalog-title">
+     <div class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+      <header class="flex flex-col gap-3">
+       <div class="flex items-center justify-between gap-2">
+        <div>
+         <h1 id="catalog-title" class="text-base font-semibold text-[#333333]">All Products</h1>
+         <p class="text-xs text-[#333333]/70">Soft-focus colors and gentle care, curated for you.</p>
+        </div>
+        <div class="hidden sm:flex items-center gap-2 text-[11px] text-[#333333]/70"><span id="catalog-count-pill" class="inline-flex items-center gap-1 rounded-full bg-[#FFFFFF] px-2 py-1 soft-card"> <span class="w-4 h-4 rounded-full bg-[#E7B7C8]"></span> <span id="catalog-count">0</span> items </span>
+        </div>
+       </div>
+       <div class="flex flex-col md:flex-row gap-3 md:items-center">
+        <form id="search-form" class="flex-1 flex items-center gap-2">
+         <div class="flex-1 flex items-center gap-2 rounded-full bg-[#FFFFFF] px-3 py-1.5 soft-card"><label for="search-input" class="sr-only">Search products</label> <span class="text-xs text-[#C2688C]" aria-hidden="true">🔍</span> <input id="search-input" name="search" type="text" class="w-full bg-transparent border-0 text-xs text-[#333333] placeholder-[#333333]/40 focus:outline-none" placeholder="Search for lip tints, serums, routines...">
+         </div><button type="submit" class="hidden md:inline-flex items-center justify-center rounded-full px-3 py-1.5 text-[11px] bg-[#C2688C] text-white soft-transition focus-ring"> Search </button>
+        </form>
+        <div class="flex flex-wrap gap-2 text-[11px]" aria-label="Filters"><button type="button" class="filter-chip rounded-full border border-[#C2688C]/30 bg-[#FFFFFF] px-3 py-1 soft-transition focus-ring" data-filter="all"> All </button> <button type="button" class="filter-chip rounded-full border border-[#C2688C]/0 bg-[#FFFFFF]/80 px-3 py-1 soft-transition focus-ring" data-filter="Makeup"> Makeup </button> <button type="button" class="filter-chip rounded-full border border-[#C2688C]/0 bg-[#FFFFFF]/80 px-3 py-1 soft-transition focus-ring" data-filter="Skin Care"> Skin Care </button> <button type="button" class="filter-chip rounded-full border border-[#C2688C]/0 bg-[#FFFFFF]/80 px-3 py-1 soft-transition focus-ring" data-filter="Body Care"> Body Care </button>
+        </div>
+       </div>
+      </header>
+      <section aria-label="Product list">
+       <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+       <p id="catalog-empty" class="hidden text-xs text-center text-[#333333]/60 mt-6">No products match your search. Try clearing filters.</p>
+      </section>
+     </div>
+    </section><!-- Product Details Page -->
+    <section id="product-page" class="hidden w-full" aria-label="Product details">
+     <div class="max-w-4xl mx-auto px-4 py-8 grid md:grid-cols-2 gap-8"><!-- Image placeholder -->
+      <div class="rounded-3xl bg-[#FFFFFF] p-5 soft-card flex flex-col gap-4">
+       <div class="relative w-full h-56 rounded-2xl bg-[#F5E6EE] flex items-center justify-center">
+        <div class="absolute -top-6 -right-3 w-10 h-10 rounded-full bg-[#E7B7C8]/70"></div>
+        <div class="absolute -bottom-8 -left-2 w-14 h-14 rounded-full bg-[#C2688C]/10"></div>
+        <div id="product-image-shape" class="relative w-28 h-32 rounded-3xl bg-[#E7B7C8]"></div>
+       </div>
+       <p class="text-[11px] text-[#333333]/70 text-center">Product image placeholder (beauty &amp; personal care).</p>
+      </div><!-- Details -->
+      <div class="flex flex-col gap-4"><button type="button" data-nav="catalog" class="self-start text-[11px] text-[#C2688C] underline-offset-4 hover:underline soft-transition focus-ring"> ← Back to catalog </button>
+       <div class="space-y-1">
+        <h1 id="product-name" class="text-base font-semibold text-[#333333]">Product Name</h1>
+        <p id="product-category" class="text-[11px] uppercase tracking-[0.16em] text-[#333333]/60">Category</p>
+       </div>
+       <div class="flex items-center justify-between gap-3 py-1">
+        <div class="flex items-baseline gap-2">
+         <p id="product-price" class="text-base font-semibold text-[#333333]">₱0.00</p>
+         <p id="product-original-price" class="hidden text-xs line-through text-[#333333]/40">₱0.00</p>
+        </div>
+        <div id="product-badge" class="text-[11px] rounded-full px-3 py-1 bg-[#F5E6EE] text-[#C2688C]">
+         New in
+        </div>
+       </div>
+       <p id="product-description" class="text-xs text-[#333333]/80 leading-relaxed">Product description goes here.</p>
+       <div class="flex flex-wrap gap-2 text-[11px]"><span class="inline-flex items-center gap-1 rounded-full bg-[#FFFFFF] px-2.5 py-1 soft-card text-[#333333]"> <span class="w-4 h-4 rounded-full bg-[#75D69C]/30 flex items-center justify-center text-[10px]"> ✓ </span> Gentle on skin </span> <span class="inline-flex items-center gap-1 rounded-full bg-[#FFFFFF] px-2.5 py-1 soft-card text-[#333333]"> <span class="w-4 h-4 rounded-full bg-[#FFC85C]/30 flex items-center justify-center text-[10px]"> ☼ </span> Everyday wear </span>
+       </div>
+       <form id="product-add-form" class="space-y-4">
+        <div class="flex items-center gap-3"><label for="product-qty" class="text-xs text-[#333333]/80"> Quantity </label>
+         <div class="inline-flex items-center rounded-full bg-[#FFFFFF] soft-card"><button type="button" id="product-qty-decrease" class="w-7 h-7 text-xs text-[#333333] soft-transition focus-ring"> − </button> <input id="product-qty" name="quantity" type="number" min="1" value="1" class="w-10 text-center text-xs border-0 bg-transparent text-[#333333] focus:outline-none"> <button type="button" id="product-qty-increase" class="w-7 h-7 text-xs text-[#333333] soft-transition focus-ring"> + </button>
+         </div>
+        </div>
+        <div class="flex flex-wrap gap-3"><button id="product-add-to-cart" type="submit" class="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-medium soft-card soft-transition focus-ring"> Add to cart </button> <button type="button" id="product-buy-now" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-[11px] border border-[#C2688C]/30 bg-[#FFFFFF] text-[#333333] soft-transition focus-ring"> Buy now </button>
+        </div>
+       </form>
+       <p id="product-add-feedback" class="text-[11px] text-[#75D69C] hidden">Added to cart. You can continue shopping or go to checkout.</p>
+      </div>
+     </div>
+    </section><!-- Cart Page -->
+    <section id="cart-page" class="hidden w-full" aria-label="Shopping cart">
+     <div class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+      <header class="flex items-center justify-between gap-2">
+       <div>
+        <h1 id="cart-title" class="text-base font-semibold text-[#333333]">Your Matahom Cart</h1>
+        <p class="text-xs text-[#333333]/70">Review your picks before checking out.</p>
+       </div><button type="button" data-nav="catalog" class="text-[11px] text-[#C2688C] underline-offset-4 hover:underline soft-transition focus-ring"> Continue shopping </button>
+      </header>
+      <div class="grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-5"><!-- Cart items -->
+       <section aria-label="Cart items" class="space-y-3">
+        <div id="cart-list" class="space-y-3"></div>
+        <p id="cart-empty" class="text-xs text-[#333333]/60">Your cart is empty. Add something lovely from the shop.</p>
+       </section><!-- Summary -->
+       <aside class="rounded-3xl bg-[#FFFFFF] p-4 soft-card space-y-4" aria-label="Order summary">
+        <h2 class="text-xs font-semibold text-[#333333]">Summary</h2>
+        <div class="space-y-1 text-xs text-[#333333]/80">
+         <div class="flex items-center justify-between"><span>Subtotal</span> <span id="summary-subtotal">₱0.00</span>
+         </div>
+         <div class="flex items-center justify-between"><span>Shipping</span> <span class="text-[#333333]/60">Calculated at checkout</span>
+         </div>
+         <div class="flex items-center justify-between"><span>Estimated tax</span> <span class="text-[#333333]/60">Included</span>
+         </div>
+         <hr class="border-[#E7B7C8]/50 my-2">
+         <div class="flex items-center justify-between font-semibold"><span>Total</span> <span id="summary-total">₱0.00</span>
+         </div>
+        </div><button id="cart-checkout-btn" type="button" class="w-full inline-flex items-center justify-center rounded-full px-4 py-2.5 text-xs font-medium soft-card soft-transition focus-ring"> Proceed to checkout </button>
+        <p class="text-[10px] text-[#333333]/60">This is a demo flow—no real payments will be processed.</p>
+       </aside>
+      </div>
+     </div>
+    </section><!-- Checkout Page -->
+    <section id="checkout-page" class="hidden w-full" aria-label="Checkout">
+     <div class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+      <header class="flex items-center justify-between gap-2">
+       <div>
+        <h1 id="checkout-title" class="text-base font-semibold text-[#333333]">Checkout</h1>
+        <p class="text-xs text-[#333333]/70">Enter your delivery details to complete your order.</p>
+       </div><button type="button" data-nav="cart" class="text-[11px] text-[#C2688C] underline-offset-4 hover:underline soft-transition focus-ring"> ← Back to cart </button>
+      </header>
+      <div class="grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-5"><!-- Delivery form -->
+       <section aria-label="Delivery information">
+        <form id="checkout-form" class="rounded-3xl bg-[#FFFFFF] p-4 soft-card space-y-4">
+         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1"><label for="first-name" class="text-xs text-[#333333]/80">First Name</label> <input id="first-name" name="firstName" type="text" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+          </div>
+          <div class="flex flex-col gap-1"><label for="last-name" class="text-xs text-[#333333]/80">Last Name</label> <input id="last-name" name="lastName" type="text" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+          </div>
+         </div>
+         <div class="flex flex-col gap-1"><label for="email" class="text-xs text-[#333333]/80">Email Address</label> <input id="email" name="email" type="email" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+         </div>
+         <div class="flex flex-col gap-1"><label for="phone" class="text-xs text-[#333333]/80">Phone Number</label> <input id="phone" name="phone" type="tel" class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+         </div>
+         <div class="flex flex-col gap-1"><label for="address" class="text-xs text-[#333333]/80">Delivery Address</label> <textarea id="address" name="address" rows="3" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]"></textarea>
+         </div>
+         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1"><label for="city" class="text-xs text-[#333333]/80">City</label> <input id="city" name="city" type="text" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+          </div>
+          <div class="flex flex-col gap-1"><label for="postal-code" class="text-xs text-[#333333]/80">Postal Code</label> <input id="postal-code" name="postalCode" type="text" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+          </div>
+         </div>
+         <div class="flex flex-col gap-1"><label for="notes" class="text-xs text-[#333333]/80">Order Notes (optional)</label> <textarea id="notes" name="notes" rows="2" class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]"></textarea>
+         </div><button type="submit" class="w-full inline-flex items-center justify-center rounded-full px-4 py-2.5 text-xs font-medium soft-card soft-transition focus-ring"> Place order (demo) </button>
+         <p id="checkout-message" class="text-[11px] text-[#75D69C] hidden">Thank you! This is a prototype—no real payment was taken.</p>
+        </form>
+       </section><!-- Order summary -->
+       <aside class="rounded-3xl bg-[#FFFFFF] p-4 soft-card space-y-4" aria-label="Order summary">
+        <h2 class="text-xs font-semibold text-[#333333]">Order Summary</h2>
+        <div id="checkout-items" class="space-y-2 max-h-[60%] overflow-y-auto"></div>
+        <div class="space-y-1 text-xs text-[#333333]/80">
+         <div class="flex items-center justify-between"><span>Subtotal</span> <span id="checkout-subtotal">₱0.00</span>
+         </div>
+         <div class="flex items-center justify-between"><span>Shipping</span> <span class="text-[#333333]/60">Standard (₱120)</span>
+         </div>
+         <hr class="border-[#E7B7C8]/50 my-2">
+         <div class="flex items-center justify-between font-semibold"><span>Total</span> <span id="checkout-total">₱0.00</span>
+         </div>
+        </div>
+        <p class="text-[10px] text-[#333333]/60">Payment section is intentionally omitted in this prototype for safety.</p>
+       </aside>
+      </div>
+     </div>
+    </section><!-- Auth Pages -->
+    <section id="login-page" class="hidden w-full" aria-label="Login">
+     <div class="max-w-md mx-auto px-4 py-10 flex flex-col gap-6">
+      <header class="text-center space-y-2">
+       <h1 id="login-title" class="text-base font-semibold text-[#333333]">Welcome Back</h1>
+       <p class="text-xs text-[#333333]/70">Sign in to view your saved routines and orders.</p>
+      </header>
+      <form id="login-form" class="rounded-3xl bg-[#FFFFFF] p-5 soft-card space-y-4">
+       <div class="flex flex-col gap-1"><label for="login-email" class="text-xs text-[#333333]/80">Email</label> <input id="login-email" name="email" type="email" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+       </div>
+       <div class="flex flex-col gap-1"><label for="login-password" class="text-xs text-[#333333]/80">Password</label> <input id="login-password" name="password" type="password" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+       </div><button type="submit" class="w-full inline-flex items-center justify-center rounded-full px-4 py-2.5 text-xs font-medium soft-card soft-transition focus-ring"> Login (demo) </button>
+       <p id="login-message" class="text-[11px] text-[#75D69C] hidden">Demo only: authentication is not connected.</p>
+       <p class="text-[11px] text-[#333333]/70 text-center">New here? <button type="button" data-nav="signup" class="text-[#C2688C] underline-offset-4 hover:underline soft-transition focus-ring"> Create an account </button></p>
+      </form>
+     </div>
+    </section>
+    <section id="signup-page" class="hidden w-full" aria-label="Sign up">
+     <div class="max-w-md mx-auto px-4 py-10 flex flex-col gap-6">
+      <header class="text-center space-y-2">
+       <h1 id="signup-title" class="text-base font-semibold text-[#333333]">Create Your Account</h1>
+       <p class="text-xs text-[#333333]/70">Save your favorite looks and routines.</p>
+      </header>
+      <form id="signup-form" class="rounded-3xl bg-[#FFFFFF] p-5 soft-card space-y-4">
+       <div class="flex flex-col gap-1"><label for="signup-name" class="text-xs text-[#333333]/80">Full Name</label> <input id="signup-name" name="name" type="text" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+       </div>
+       <div class="flex flex-col gap-1"><label for="signup-email" class="text-xs text-[#333333]/80">Email</label> <input id="signup-email" name="email" type="email" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+       </div>
+       <div class="flex flex-col gap-1"><label for="signup-password" class="text-xs text-[#333333]/80">Password</label> <input id="signup-password" name="password" type="password" required class="rounded-2xl border border-[#E7B7C8]/60 bg-[#F5E6EE]/40 px-3 py-1.5 text-xs text-[#333333] focus:outline-none focus:ring-1 focus:ring-[#C2688C]">
+       </div><button type="submit" class="w-full inline-flex items-center justify-center rounded-full px-4 py-2.5 text-xs font-medium soft-card soft-transition focus-ring"> Sign up (demo) </button>
+       <p id="signup-message" class="text-[11px] text-[#75D69C] hidden">Demo only: sign up is not connected.</p>
+       <p class="text-[11px] text-[#333333]/70 text-center">Already have an account? <button type="button" data-nav="login" class="text-[#C2688C] underline-offset-4 hover:underline soft-transition focus-ring"> Login </button></p>
+      </form>
+     </div>
+    </section><!-- Admin Dashboard -->
+    <section id="admin-page" class="hidden w-full" aria-label="Admin dashboard">
+     <div class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+      <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+       <div>
+        <h1 id="admin-title" class="text-base font-semibold text-[#333333]">Matahom Admin</h1>
+        <p class="text-xs text-[#333333]/70">Lightweight demo dashboard for product and order overview.</p>
+       </div>
+       <div class="inline-flex items-center gap-2 rounded-full bg-[#FFFFFF] px-3 py-1.5 soft-card text-[11px]"><span class="w-6 h-6 rounded-full bg-[#E7B7C8] flex items-center justify-center text-xs" aria-hidden="true">👑</span> <span>Admin (demo)</span>
+       </div>
+      </header><!-- Stats -->
+      <section aria-label="Store stats">
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <article class="rounded-3xl bg-[#FFFFFF] p-4 soft-card space-y-1">
+         <h2 class="text-[11px] text-[#333333]/70">Today’s Views</h2>
+         <p class="text-xl font-semibold text-[#333333]">1,248</p>
+         <p class="text-[10px] text-[#75D69C]">+18% vs yesterday</p>
+        </article>
+        <article class="rounded-3xl bg-[#FFFFFF] p-4 soft-card space-y-1">
+         <h2 class="text-[11px] text-[#333333]/70">Cart Adds</h2>
+         <p id="admin-cart-adds" class="text-xl font-semibold text-[#333333]">0</p>
+         <p class="text-[10px] text-[#333333]/60">Demo based on user interactions</p>
+        </article>
+        <article class="rounded-3xl bg-[#FFFFFF] p-4 soft-card space-y-1">
+         <h2 class="text-[11px] text-[#333333]/70">Conversion Rate</h2>
+         <p class="text-xl font-semibold text-[#333333]">3.2%</p>
+         <p class="text-[10px] text-[#FFC85C]">Prototype metric for reference</p>
+        </article>
+       </div>
+      </section><!-- Product management -->
+      <section aria-label="Product management" class="space-y-3">
+       <div class="flex items-center justify-between gap-2">
+        <h2 class="text-xs font-semibold text-[#333333]">Product overview</h2><button type="button" class="inline-flex items-center gap-1 rounded-full bg-[#FFFFFF] px-3 py-1.5 text-[11px] soft-card soft-transition focus-ring"> <span class="w-4 h-4 rounded-full bg-[#C2688C]/80 text-[11px] text-white flex items-center justify-center" aria-hidden="true">+</span> New product (demo) </button>
+       </div>
+       <div id="admin-products" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+      </section>
+     </div>
+    </section>
+   </main>
+   <footer class="w-full border-t border-[#E7B7C8]/60 bg-[#FFFFFF]/80">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
+     <p id="footer-text" class="text-[10px] text-[#333333]/70 text-center sm:text-left">© 2025 Matahom Beauty. All rights reserved.</p>
+     <p class="text-[10px] text-[#333333]/60 text-center sm:text-right">Prototype only · For design exploration and user flow testing.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+      // ----- Brand config + Element SDK -----
+      const defaultConfig = {
+        brand_title: "Matahom",
+        brand_tagline: "Soft, modern beauty for every day.",
+        hero_subtitle:
+          "Curated essentials for glowing, effortless looks.",
+        home_cta_text: "Shop New Arrivals",
+        catalog_title: "All Products",
+        cart_title: "Your Matahom Cart",
+        checkout_title: "Checkout",
+        login_title: "Welcome Back",
+        signup_title: "Create Your Account",
+        admin_title: "Matahom Admin",
+        footer_text: "© 2025 Matahom Beauty. All rights reserved.",
+        // Colors (up to 5)
+        background_color: "#F5E6EE",
+        surface_color: "#FFFFFF",
+        text_color: "#333333",
+        primary_action_color: "#C2688C",
+        secondary_action_color: "#E7B7C8",
+        font_family: "Poppins",
+        font_size: 14
+      };
+
+      function applyConfigToUI(config) {
+        const merged = { ...defaultConfig, ...(config || {}) };
+
+        // TEXTS
+        const brandTitle = document.getElementById("brand-title");
+        const heroTitle = document.getElementById("hero-title");
+        const heroTagline = document.getElementById("brand-tagline");
+        const heroSubtitle = document.getElementById("hero-subtitle");
+        const homeCtaText = document.getElementById("home-cta-text");
+        const catalogTitle = document.getElementById("catalog-title");
+        const cartTitle = document.getElementById("cart-title");
+        const checkoutTitle =
+          document.getElementById("checkout-title");
+        const loginTitle = document.getElementById("login-title");
+        const signupTitle = document.getElementById("signup-title");
+        const adminTitle = document.getElementById("admin-title");
+        const footerText = document.getElementById("footer-text");
+
+        if (brandTitle)
+          brandTitle.textContent = merged.brand_title;
+        if (heroTitle)
+          heroTitle.textContent = merged.brand_title;
+        if (heroTagline)
+          heroTagline.textContent = merged.brand_tagline;
+        if (heroSubtitle)
+          heroSubtitle.textContent = merged.hero_subtitle;
+        if (homeCtaText)
+          homeCtaText.textContent = merged.home_cta_text;
+        if (catalogTitle)
+          catalogTitle.textContent = merged.catalog_title;
+        if (cartTitle) cartTitle.textContent = merged.cart_title;
+        if (checkoutTitle)
+          checkoutTitle.textContent = merged.checkout_title;
+        if (loginTitle)
+          loginTitle.textContent = merged.login_title;
+        if (signupTitle)
+          signupTitle.textContent = merged.signup_title;
+        if (adminTitle)
+          adminTitle.textContent = merged.admin_title;
+        if (footerText)
+          footerText.textContent = merged.footer_text;
+
+        // COLORS
+        document.body.style.backgroundColor =
+          merged.background_color;
+        // Primary action buttons
+        const primaryButtons = document.querySelectorAll(
+          "#home-cta-btn, #product-add-to-cart, #cart-checkout-btn, #checkout-form button[type='submit'], #login-form button[type='submit'], #signup-form button[type='submit']"
+        );
+        primaryButtons.forEach((btn) => {
+          btn.style.backgroundColor =
+            merged.primary_action_color;
+          btn.style.color = "#FFFFFF";
+        });
+
+        // Secondary actions
+        const secondaryButtons = document.querySelectorAll(
+          "#product-buy-now, #cart-nav-btn"
+        );
+        secondaryButtons.forEach((btn) => {
+          btn.style.backgroundColor =
+            merged.surface_color;
+          btn.style.color = merged.text_color;
+          btn.style.borderColor =
+            merged.secondary_action_color;
+        });
+
+        // Surface backgrounds
+        const surfaces = document.querySelectorAll(
+          ".soft-card, .soft-surface"
+        );
+        surfaces.forEach((el) => {
+          el.style.backgroundColor = merged.surface_color;
+        });
+
+        // Text color
+        const textEls = document.querySelectorAll(
+          "h1, h2, h3, p, span, label, input, textarea, button"
+        );
+        textEls.forEach((el) => {
+          if (!el.classList.contains("text-[#C2688C]")) {
+            el.style.color = merged.text_color;
+          }
+        });
+
+        // FONT FAMILY & SIZE
+        const baseFont = merged.font_family || "Poppins";
+        const baseSize = merged.font_size || 14;
+        document.body.style.fontFamily =
+          baseFont + ", Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+
+        // Scale text
+        const titleEls = document.querySelectorAll("h1");
+        titleEls.forEach((el) => {
+          el.style.fontSize = baseSize * 1.6 + "px";
+        });
+        const h2Els = document.querySelectorAll("h2");
+        h2Els.forEach((el) => {
+          el.style.fontSize = baseSize * 1.3 + "px";
+        });
+        const bodyEls = document.querySelectorAll("p, span, label, input, textarea, button, li");
+        bodyEls.forEach((el) => {
+          if (!el.style.fontSize) {
+            el.style.fontSize = baseSize + "px";
+          }
+        });
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            applyConfigToUI(config);
+          },
+          mapToCapabilities: (config) => {
+            const cfg = config || defaultConfig;
+            return {
+              recolorables: [
+                {
+                  get: () =>
+                    cfg.background_color ||
+                    defaultConfig.background_color,
+                  set: (value) => {
+                    cfg.background_color = value;
+                    window.elementSdk.setConfig({
+                      background_color: value
+                    });
+                  }
+                },
+                {
+                  get: () =>
+                    cfg.surface_color ||
+                    defaultConfig.surface_color,
+                  set: (value) => {
+                    cfg.surface_color = value;
+                    window.elementSdk.setConfig({
+                      surface_color: value
+                    });
+                  }
+                },
+                {
+                  get: () =>
+                    cfg.text_color || defaultConfig.text_color,
+                  set: (value) => {
+                    cfg.text_color = value;
+                    window.elementSdk.setConfig({
+                      text_color: value
+                    });
+                  }
+                },
+                {
+                  get: () =>
+                    cfg.primary_action_color ||
+                    defaultConfig.primary_action_color,
+                  set: (value) => {
+                    cfg.primary_action_color = value;
+                    window.elementSdk.setConfig({
+                      primary_action_color: value
+                    });
+                  }
+                },
+                {
+                  get: () =>
+                    cfg.secondary_action_color ||
+                    defaultConfig.secondary_action_color,
+                  set: (value) => {
+                    cfg.secondary_action_color = value;
+                    window.elementSdk.setConfig({
+                      secondary_action_color: value
+                    });
+                  }
+                }
+              ],
+              borderables: [],
+              fontEditable: {
+                get: () =>
+                  cfg.font_family || defaultConfig.font_family,
+                set: (value) => {
+                  cfg.font_family = value;
+                  window.elementSdk.setConfig({
+                    font_family: value
+                  });
+                }
+              },
+              fontSizeable: {
+                get: () =>
+                  cfg.font_size || defaultConfig.font_size,
+                set: (value) => {
+                  cfg.font_size = value;
+                  window.elementSdk.setConfig({
+                    font_size: value
+                  });
+                }
+              }
+            };
+          },
+          mapToEditPanelValues: (config) =>
+            new Map([
+              [
+                "brand_title",
+                config.brand_title || defaultConfig.brand_title
+              ],
+              [
+                "brand_tagline",
+                config.brand_tagline ||
+                  defaultConfig.brand_tagline
+              ],
+              [
+                "hero_subtitle",
+                config.hero_subtitle ||
+                  defaultConfig.hero_subtitle
+              ],
+              [
+                "home_cta_text",
+                config.home_cta_text ||
+                  defaultConfig.home_cta_text
+              ],
+              [
+                "catalog_title",
+                config.catalog_title ||
+                  defaultConfig.catalog_title
+              ],
+              [
+                "cart_title",
+                config.cart_title || defaultConfig.cart_title
+              ],
+              [
+                "checkout_title",
+                config.checkout_title ||
+                  defaultConfig.checkout_title
+              ],
+              [
+                "login_title",
+                config.login_title ||
+                  defaultConfig.login_title
+              ],
+              [
+                "signup_title",
+                config.signup_title ||
+                  defaultConfig.signup_title
+              ],
+              [
+                "admin_title",
+                config.admin_title ||
+                  defaultConfig.admin_title
+              ],
+              [
+                "footer_text",
+                config.footer_text ||
+                  defaultConfig.footer_text
+              ]
+            ])
+        });
+      } else {
+        // Fallback if SDK not available
+        applyConfigToUI(defaultConfig);
+      }
+
+      // ----- Demo data -----
+      const products = [
+        {
+          id: "lip-cloud-tint",
+          name: "Lip Cloud Tint",
+          category: "Makeup",
+          price: 499,
+          originalPrice: 599,
+          featured: true,
+          description:
+            "A whipped, soft-focus tint that blurs lips and cheeks with a diffused, cloud-like finish.",
+          badge: "Bestseller"
+        },
+        {
+          id: "dew-serum",
+          name: "Dew Veil Serum",
+          category: "Skin Care",
+          price: 890,
+          originalPrice: null,
+          featured: true,
+          description:
+            "Lightweight, dewy serum with niacinamide and hyaluronic acid for everyday radiance.",
+          badge: "Hydrating"
+        },
+        {
+          id: "soft-wash",
+          name: "Soft Cream Body Wash",
+          category: "Body Care",
+          price: 520,
+          originalPrice: null,
+          featured: false,
+          description:
+            "Creamy body wash that leaves skin cushiony-soft with a subtle floral musk scent.",
+          badge: "New in"
+        },
+        {
+          id: "velvet-cream",
+          name: "Velvet Skin Cream",
+          category: "Skin Care",
+          price: 750,
+          originalPrice: 820,
+          featured: true,
+          description:
+            "A pillowy moisturizer that seals in hydration without feeling heavy.",
+          badge: "Sensitive-friendly"
+        },
+        {
+          id: "glow-stick",
+          name: "Soft Glow Stick",
+          category: "Makeup",
+          price: 560,
+          originalPrice: null,
+          featured: false,
+          description:
+            "Sheer, balmy highlight for a glassy, from-within glow.",
+          badge: "Sheer glow"
+        },
+        {
+          id: "hand-veil",
+          name: "Hand Veil Cream",
+          category: "Body Care",
+          price: 390,
+          originalPrice: null,
+          featured: false,
+          description:
+            "Nourishing hand cream with a non-greasy, satin finish.",
+          badge: "Daily care"
+        }
+      ];
+
+      // ----- Cart state -----
+      const cart = [];
+      let cartAddsCount = 0;
+
+      function formatCurrency(value) {
+        return "₱" + value.toLocaleString("en-PH", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+
+      // ----- Navigation -----
+      const pages = {
+        home: document.getElementById("home-page"),
+        catalog: document.getElementById("catalog-page"),
+        product: document.getElementById("product-page"),
+        cart: document.getElementById("cart-page"),
+        checkout: document.getElementById("checkout-page"),
+        login: document.getElementById("login-page"),
+        signup: document.getElementById("signup-page"),
+        admin: document.getElementById("admin-page")
+      };
+
+      function showPage(key) {
+        Object.entries(pages).forEach(([name, el]) => {
+          if (!el) return;
+          el.classList.toggle("hidden", name !== key);
+        });
+        // Scroll top for clarity
+        const main = document.getElementById("main-content");
+        if (main) main.scrollTop = 0;
+      }
+
+      // Attach nav buttons
+      document.querySelectorAll("[data-nav]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-nav");
+          if (target && pages[target]) showPage(target);
+        });
+      });
+
+      const homeCtaBtn = document.getElementById("home-cta-btn");
+      if (homeCtaBtn) {
+        homeCtaBtn.addEventListener("click", () =>
+          showPage("catalog")
+        );
+      }
+      const cartNavBtn = document.getElementById("cart-nav-btn");
+      if (cartNavBtn) {
+        cartNavBtn.addEventListener("click", () => showPage("cart"));
+      }
+
+      // Category chips on home
+      document
+        .querySelectorAll("[data-filter-category]")
+        .forEach((chip) => {
+          chip.addEventListener("click", () => {
+            const cat = chip.getAttribute("data-filter-category");
+            setActiveFilter(cat);
+            filterAndRenderCatalog();
+            showPage("catalog");
+          });
+        });
+
+      // ----- Catalog rendering -----
+      const catalogGrid = document.getElementById("catalog-grid");
+      const catalogEmpty = document.getElementById("catalog-empty");
+      const catalogCount = document.getElementById("catalog-count");
+
+      let activeFilter = "all";
+      let searchTerm = "";
+
+      function setActiveFilter(filter) {
+        activeFilter = filter || "all";
+        document
+          .querySelectorAll(".filter-chip")
+          .forEach((chip) => {
+            const f = chip.getAttribute("data-filter");
+            if (f === activeFilter || (f === "all" && !filter)) {
+              chip.classList.add(
+                "border-[#C2688C]/70",
+                "bg-[#FFFFFF]"
+              );
+            } else {
+              chip.classList.remove(
+                "border-[#C2688C]/70",
+                "bg-[#FFFFFF]"
+              );
+            }
+          });
+      }
+
+      document.querySelectorAll(".filter-chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const f = chip.getAttribute("data-filter");
+          setActiveFilter(f);
+          filterAndRenderCatalog();
+        });
+      });
+
+      const searchForm = document.getElementById("search-form");
+      const searchInput = document.getElementById("search-input");
+      if (searchForm && searchInput) {
+        searchForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          searchTerm = searchInput.value.trim().toLowerCase();
+          filterAndRenderCatalog();
+        });
+        searchInput.addEventListener("input", () => {
+          searchTerm = searchInput.value.trim().toLowerCase();
+          filterAndRenderCatalog();
+        });
+      }
+
+      function createProductCard(product) {
+        const card = document.createElement("article");
+        card.className =
+          "rounded-3xl bg-[#FFFFFF] p-3 soft-card soft-transition flex flex-col gap-3 hover:-translate-y-0.5";
+        card.innerHTML = `
+          <div class="relative rounded-2xl bg-[#F5E6EE] h-32 flex items-center justify-center overflow-hidden">
+            <div class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-[#E7B7C8]/70"></div>
+            <div class="absolute -bottom-6 -left-4 w-10 h-10 rounded-full bg-[#C2688C]/10"></div>
+            <div class="relative w-12 h-16 rounded-3xl bg-[#E7B7C8]"></div>
+          </div>
+          <div class="flex-1 flex flex-col gap-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-xs font-semibold text-[#333333] truncate">${product.name}</h3>
+              <span class="text-[10px] text-[#333333]/50 uppercase tracking-[0.16em]">${product.category}</span>
+            </div>
+            <p class="text-[11px] text-[#333333]/70 line-clamp-2">${product.description}</p>
+            <div class="flex items-center justify-between gap-2 mt-1">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm font-semibold text-[#333333]">${formatCurrency(
+                  product.price
+                )}</span>
+                ${
+                  product.originalPrice
+                    ? `<span class="text-[10px] line-through text-[#333333]/40">${formatCurrency(
+                        product.originalPrice
+                      )}</span>`
+                    : ""
+                }
+              </div>
+              <span class="text-[10px] rounded-full px-2 py-0.5 bg-[#F5E6EE] text-[#C2688C]">${product.badge}</span>
+            </div>
+          </div>
+          <div class="flex gap-2 mt-1">
+            <button type="button" data-view-product="${
+              product.id
+            }" class="flex-1 inline-flex items-center justify-center rounded-full px-3 py-1.5 text-[11px] border border-[#C2688C]/30 bg-[#FFFFFF] text-[#333333] soft-transition focus-ring">
+              View
+            </button>
+            <button type="button" data-add-product="${
+              product.id
+            }" class="inline-flex items-center justify-center rounded-full px-3 py-1.5 text-[11px] bg-[#C2688C] text-white soft-transition focus-ring">
+              + Cart
+            </button>
+          </div>
+        `;
+        return card;
+      }
+
+      function filterAndRenderCatalog() {
+        if (!catalogGrid) return;
+        catalogGrid.innerHTML = "";
+        let filtered = products.slice();
+
+        if (activeFilter !== "all") {
+          filtered = filtered.filter(
+            (p) => p.category === activeFilter
+          );
+        }
+        if (searchTerm) {
+          filtered = filtered.filter(
+            (p) =>
+              p.name.toLowerCase().includes(searchTerm) ||
+              p.description
+                .toLowerCase()
+                .includes(searchTerm) ||
+              p.category.toLowerCase().includes(searchTerm)
+          );
+        }
+
+        if (catalogCount) {
+          catalogCount.textContent = String(filtered.length);
+        }
+
+        if (filtered.length === 0) {
+          if (catalogEmpty) catalogEmpty.classList.remove("hidden");
+          return;
+        }
+        if (catalogEmpty)
+          catalogEmpty.classList.add("hidden");
+
+        filtered.forEach((product) => {
+          const card = createProductCard(product);
+          catalogGrid.appendChild(card);
+        });
+
+        // Attach events for dynamic elements
+        catalogGrid
+          .querySelectorAll("[data-view-product]")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-view-product");
+              const product = products.find((p) => p.id === id);
+              if (product) {
+                loadProductDetails(product);
+                showPage("product");
+              }
+            });
+          });
+
+        catalogGrid
+          .querySelectorAll("[data-add-product]")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-add-product");
+              const product = products.find((p) => p.id === id);
+              if (product) {
+                addToCart(product, 1);
+              }
+            });
+          });
+      }
+
+      // Featured products on home
+      const featuredContainer =
+        document.getElementById("featured-products");
+      if (featuredContainer) {
+        const featured = products.filter((p) => p.featured);
+        featured.forEach((product) => {
+          const card = createProductCard(product);
+          featuredContainer.appendChild(card);
+        });
+      }
+
+      // ----- Product details -----
+      function loadProductDetails(product) {
+        const nameEl = document.getElementById("product-name");
+        const catEl = document.getElementById("product-category");
+        const priceEl = document.getElementById("product-price");
+        const origEl = document.getElementById(
+          "product-original-price"
+        );
+        const descEl = document.getElementById(
+          "product-description"
+        );
+        const badgeEl =
+          document.getElementById("product-badge");
+
+        if (nameEl) nameEl.textContent = product.name;
+        if (catEl)
+          catEl.textContent =
+            product.category.toUpperCase();
+        if (priceEl)
+          priceEl.textContent = formatCurrency(product.price);
+        if (origEl) {
+          if (product.originalPrice) {
+            origEl.classList.remove("hidden");
+            origEl.textContent = formatCurrency(
+              product.originalPrice
+            );
+          } else {
+            origEl.classList.add("hidden");
+          }
+        }
+        if (descEl) descEl.textContent = product.description;
+        if (badgeEl) badgeEl.textContent = product.badge;
+
+        const feedback =
+          document.getElementById("product-add-feedback");
+        if (feedback) feedback.classList.add("hidden");
+
+        const qtyInput =
+          document.getElementById("product-qty");
+        if (qtyInput) qtyInput.value = "1";
+
+        const addForm =
+          document.getElementById("product-add-form");
+        if (addForm) {
+          addForm.onsubmit = (e) => {
+            e.preventDefault();
+            const qtyVal =
+              parseInt(qtyInput.value, 10) || 1;
+            addToCart(product, qtyVal);
+            if (feedback)
+              feedback.classList.remove("hidden");
+          };
+        }
+
+        const decBtn =
+          document.getElementById("product-qty-decrease");
+        const incBtn =
+          document.getElementById("product-qty-increase");
+        if (decBtn && qtyInput) {
+          decBtn.onclick = () => {
+            let v = parseInt(qtyInput.value, 10) || 1;
+            v = Math.max(1, v - 1);
+            qtyInput.value = String(v);
+          };
+        }
+        if (incBtn && qtyInput) {
+          incBtn.onclick = () => {
+            let v = parseInt(qtyInput.value, 10) || 1;
+            v += 1;
+            qtyInput.value = String(v);
+          };
+        }
+
+        const buyNowBtn =
+          document.getElementById("product-buy-now");
+        if (buyNowBtn) {
+          buyNowBtn.onclick = () => {
+            addToCart(product, 1);
+            showPage("checkout");
+            syncCheckoutFromCart();
+          };
+        }
+      }
+
+      // ----- Cart logic -----
+      const cartList = document.getElementById("cart-list");
+      const cartEmpty = document.getElementById("cart-empty");
+      const cartCountPill =
+        document.getElementById("cart-count-pill");
+      const cartCount =
+        cartCountPill && cartCountPill.firstChild;
+      const summarySubtotal =
+        document.getElementById("summary-subtotal");
+      const summaryTotal =
+        document.getElementById("summary-total");
+      const cartCheckoutBtn =
+        document.getElementById("cart-checkout-btn");
+      const adminCartAdds =
+        document.getElementById("admin-cart-adds");
+
+      function addToCart(product, quantity) {
+        quantity = Math.max(1, quantity || 1);
+        const existing = cart.find((c) => c.id === product.id);
+        if (existing) {
+          existing.quantity += quantity;
+        } else {
+          cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity,
+            category: product.category
+          });
+        }
+        cartAddsCount += quantity;
+        if (adminCartAdds)
+          adminCartAdds.textContent = String(
+            cartAddsCount
+          );
+        renderCart();
+      }
+
+      function updateCartItem(id, quantity) {
+        const item = cart.find((c) => c.id === id);
+        if (!item) return;
+        item.quantity = Math.max(1, quantity);
+        renderCart();
+      }
+
+      function removeCartItem(id) {
+        const idx = cart.findIndex((c) => c.id === id);
+        if (idx >= 0) {
+          cart.splice(idx, 1);
+          renderCart();
+        }
+      }
+
+      function renderCart() {
+        if (!cartList) return;
+        cartList.innerHTML = "";
+        if (cart.length === 0) {
+          if (cartEmpty)
+            cartEmpty.classList.remove("hidden");
+        } else if (cartEmpty) {
+          cartEmpty.classList.add("hidden");
+        }
+
+        let total = 0;
+        cart.forEach((item) => {
+          total += item.price * item.quantity;
+          const row = document.createElement("div");
+          row.className =
+            "rounded-3xl bg-[#FFFFFF] p-3 soft-card flex items-center gap-3";
+          row.innerHTML = `
+            <div class="w-14 h-14 rounded-2xl bg-[#F5E6EE] flex items-center justify-center">
+              <div class="w-7 h-10 rounded-2xl bg-[#E7B7C8]"></div>
+            </div>
+            <div class="flex-1 flex flex-col gap-1">
+              <div class="flex items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-xs font-semibold text-[#333333]">${item.name}</h3>
+                  <p class="text-[10px] text-[#333333]/60">${item.category}</p>
+                </div>
+                <button type="button" data-remove="${
+                  item.id
+                }" class="text-[10px] text-[#FF6978] focus-ring">
+                  Remove
+                </button>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <div class="inline-flex items-center rounded-full bg-[#F5E6EE]">
+                  <button type="button" data-decrease="${
+                    item.id
+                  }" class="w-7 h-7 text-xs text-[#333333] soft-transition focus-ring">−</button>
+                  <input type="number" min="1" value="${
+                    item.quantity
+                  }" data-qty="${item.id}" class="w-10 text-center text-xs border-0 bg-transparent text-[#333333] focus:outline-none" />
+                  <button type="button" data-increase="${
+                    item.id
+                  }" class="w-7 h-7 text-xs text-[#333333] soft-transition focus-ring">+</button>
+                </div>
+                <p class="text-xs font-semibold text-[#333333]">${formatCurrency(
+                  item.price * item.quantity
+                )}</p>
+              </div>
+            </div>
+          `;
+          cartList.appendChild(row);
+        });
+
+        // Update counts
+        if (cartCountPill) {
+          if (cart.length > 0) {
+            cartCountPill.classList.remove("hidden");
+            cartCountPill.textContent = String(cart.length);
+          } else {
+            cartCountPill.classList.add("hidden");
+          }
+        }
+
+        if (summarySubtotal)
+          summarySubtotal.textContent = formatCurrency(
+            total
+          );
+        if (summaryTotal)
+          summaryTotal.textContent = formatCurrency(total);
+
+        // Attach events for dynamic cart rows
+        cartList
+          .querySelectorAll("[data-remove]")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-remove");
+              removeCartItem(id);
+              syncCheckoutFromCart();
+            });
+          });
+        cartList
+          .querySelectorAll("[data-decrease]")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-decrease");
+              const input = cartList.querySelector(
+                `[data-qty="${id}"]`
+              );
+              if (!input) return;
+              let v = parseInt(input.value, 10) || 1;
+              v = Math.max(1, v - 1);
+              input.value = String(v);
+              updateCartItem(id, v);
+              syncCheckoutFromCart();
+            });
+          });
+        cartList
+          .querySelectorAll("[data-increase]")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-increase");
+              const input = cartList.querySelector(
+                `[data-qty="${id}"]`
+              );
+              if (!input) return;
+              let v = parseInt(input.value, 10) || 1;
+              v += 1;
+              input.value = String(v);
+              updateCartItem(id, v);
+              syncCheckoutFromCart();
+            });
+          });
+        cartList
+          .querySelectorAll("[data-qty]")
+          .forEach((input) => {
+            input.addEventListener("change", () => {
+              const id = input.getAttribute("data-qty");
+              let v = parseInt(input.value, 10) || 1;
+              v = Math.max(1, v);
+              input.value = String(v);
+              updateCartItem(id, v);
+              syncCheckoutFromCart();
+            });
+          });
+
+        syncCheckoutFromCart();
+      }
+
+      if (cartCheckoutBtn) {
+        cartCheckoutBtn.addEventListener("click", () => {
+          showPage("checkout");
+          syncCheckoutFromCart();
+        });
+      }
+
+      // ----- Checkout sync -----
+      const checkoutItems =
+        document.getElementById("checkout-items");
+      const checkoutSubtotal =
+        document.getElementById("checkout-subtotal");
+      const checkoutTotal =
+        document.getElementById("checkout-total");
+
+      function syncCheckoutFromCart() {
+        if (!checkoutItems) return;
+        checkoutItems.innerHTML = "";
+        let subtotal = 0;
+        cart.forEach((item) => {
+          subtotal += item.price * item.quantity;
+          const row = document.createElement("div");
+          row.className =
+            "flex items-center justify-between gap-2 text-xs text-[#333333]/80";
+          row.innerHTML = `
+            <div>
+              <p class="font-medium text-[#333333]">${item.name}</p>
+              <p class="text-[10px] text-[#333333]/60">x ${item.quantity}</p>
+            </div>
+            <p class="font-semibold text-[#333333]">${formatCurrency(
+              item.price * item.quantity
+            )}</p>
+          `;
+          checkoutItems.appendChild(row);
+        });
+
+        if (checkoutSubtotal)
+          checkoutSubtotal.textContent = formatCurrency(
+            subtotal
+          );
+        const shipping = cart.length > 0 ? 120 : 0;
+        if (checkoutTotal)
+          checkoutTotal.textContent = formatCurrency(
+            subtotal + shipping
+          );
+      }
+
+      // Checkout form
+      const checkoutForm =
+        document.getElementById("checkout-form");
+      const checkoutMsg =
+        document.getElementById("checkout-message");
+      if (checkoutForm) {
+        checkoutForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (checkoutMsg)
+            checkoutMsg.classList.remove("hidden");
+        });
+      }
+
+      // Auth forms just show demo status
+      const loginForm = document.getElementById("login-form");
+      const loginMsg =
+        document.getElementById("login-message");
+      if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (loginMsg)
+            loginMsg.classList.remove("hidden");
+        });
+      }
+
+      const signupForm =
+        document.getElementById("signup-form");
+      const signupMsg =
+        document.getElementById("signup-message");
+      if (signupForm) {
+        signupForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (signupMsg)
+            signupMsg.classList.remove("hidden");
+        });
+      }
+
+      // Initial render
+      setActiveFilter("all");
+      filterAndRenderCatalog();
+      renderCart();
+
+      // Admin product overview
+      const adminProducts =
+        document.getElementById("admin-products");
+      if (adminProducts) {
+        products.forEach((p) => {
+          const card = document.createElement("article");
+          card.className =
+            "rounded-3xl bg-[#FFFFFF] p-3 soft-card space-y-1";
+          card.innerHTML = `
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-xs font-semibold text-[#333333] truncate">${p.name}</h3>
+              <span class="text-[10px] text-[#333333]/50 uppercase tracking-[0.16em]">${p.category}</span>
+            </div>
+            <p class="text-[11px] text-[#333333]/70 line-clamp-2">${p.description}</p>
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <span class="text-xs font-semibold text-[#333333]">${formatCurrency(
+                p.price
+              )}</span>
+              <button type="button" class="text-[10px] text-[#C2688C] underline-offset-4 hover:underline focus-ring">
+                Edit (demo)
+              </button>
+            </div>
+          `;
+          adminProducts.appendChild(card);
+        });
+      }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6afb9a44b2e2e0',t:'MTc2NDUxMjM5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
