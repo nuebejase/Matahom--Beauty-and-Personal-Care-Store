@@ -1,0 +1,136 @@
+├── backend/                                  # Flask REST API (Modular Architecture)
+│   ├── app.py                                 # Application entry point
+│   ├── config.py                              # Global configurations
+│   ├── requirements.txt                       # Python dependencies
+│   ├── wsgi.py                                # WSGI server entry (Gunicorn/uwsgi)
+│   │
+│   ├── instance/                              # Sensitive configs (ignored in Git)
+│   │   └── config.py                          # Local DB credentials (dev environment)
+│   │
+│   ├── models/                                # Database ORM Models (SQLAlchemy)
+│   │   ├── user_model.py                      # Users entity
+│   │   ├── product_model.py                   # Products entity
+│   │   ├── category_model.py                  # Categories entity
+│   │   ├── order_model.py                     # Orders entity
+│   │   ├── order_items_model.py               # Order Items entity
+│   │   ├── payment_model.py                   # Payments entity
+│   │   └── inventory_model.py                 # Inventory entity
+│   │
+│   ├── routes/                                # Route Controllers (Flask Blueprints)
+│   │   ├── auth_routes.py                     # Login / Register
+│   │   ├── user_routes.py                     # Users CRUD
+│   │   ├── product_routes.py                  # Products CRUD
+│   │   ├── category_routes.py                 # Category CRUD
+│   │   ├── order_routes.py                    # Place/View Orders
+│   │   ├── order_items_routes.py              # Manage cart/order items
+│   │   ├── payment_routes.py                  # Payment creation/verification
+│   │   └── inventory_routes.py                # Stock update endpoints
+│   │
+│   ├── services/                              # Business Logic Layer
+│   │   ├── user_service.py
+│   │   ├── product_service.py
+│   │   ├── category_service.py
+│   │   ├── order_service.py
+│   │   ├── order_items_service.py
+│   │   ├── payment_service.py
+│   │   └── inventory_service.py
+│   │
+│   ├── middleware/
+│   │   └── auth_middleware.py                 # JWT Authentication middleware
+│   │
+│   ├── utils/                                 # Helper Functions / Shared utilities
+│   │   ├── jwt_helper.py
+│   │   ├── password_helper.py
+│   │   ├── validators.py
+│   │   └── response.py
+│   │
+│   └── migrations/
+│       ├── schema.sql                         # Full DB schema for setup
+│       └── seed_data.sql                      # Default sample data
+│
+│
+├── frontend/                                  # Angular 17+ Web Application
+│   ├── angular.json
+│   ├── package.json
+│   ├── tsconfig.json
+│   │
+│   └── src/
+│       ├── index.html
+│       ├── main.ts
+│       ├── styles.css
+│       │
+│       ├── environments/
+│       │   ├── environment.ts                 # Dev API URL
+│       │   └── environment.prod.ts            # Prod API URL
+│       │
+│       ├── app/
+│       │   ├── app-routing.module.ts          # Routing configuration
+│       │   └── app.module.ts                  # Root module
+│       │
+│       │   ├── core/                          # Global reusable modules
+│       │   │   ├── services/                  # API integrations
+│       │   │   │   ├── api.service.ts
+│       │   │   │   ├── auth.service.ts
+│       │   │   │   ├── product.service.ts
+│       │   │   │   ├── category.service.ts
+│       │   │   │   ├── order.service.ts
+│       │   │   │   ├── payment.service.ts
+│       │   │   │   └── inventory.service.ts
+│       │   │   │
+│       │   │   └── guards/
+│       │   │       └── auth.guard.ts           # Route protection guard
+│       │   │
+│       │   ├── shared/                        # Reusable UI components
+│       │   │   ├── navbar/
+│       │   │   ├── footer/
+│       │   │   ├── product-card/
+│       │   │   └── loader/
+│       │   │
+│       │   ├── modules/                       # Feature Modules (Lazy-loaded)
+│       │   │   ├── auth/
+│       │   │   │   ├── login/
+│       │   │   │   └── register/
+│       │   │   │
+│       │   │   ├── products/
+│       │   │   │   ├── product-list/
+│       │   │   │   └── product-details/
+│       │   │   │
+│       │   │   ├── categories/
+│       │   │   │   └── category-list/
+│       │   │   │
+│       │   │   ├── cart/
+│       │   │   │   └── cart-page/
+│       │   │   │
+│       │   │   ├── orders/
+│       │   │   │   ├── checkout/
+│       │   │   │   └── order-history/
+│       │   │   │
+│       │   │   └── admin/
+│       │   │       ├── dashboard/
+│       │   │       ├── manage-products/
+│       │   │       ├── manage-categories/
+│       │   │       ├── manage-orders/
+│       │   │       ├── manage-payments/
+│       │   │       └── manage-inventory/
+│
+│
+├── database/
+│   ├── erd/
+│   │   ├── crows_foot_notation.png
+│   │   └── chen_notation.png
+│   │
+│   ├── backups/
+│   │   └── matahomph_backup.sql
+│   │
+│   └── matahomph_db.sql
+│
+│
+├── docs/
+│   ├── SRS/
+│   ├── proposal/
+│   ├── API Reference/
+│   ├── class_diagram.png
+│   ├── sequence_diagram.png
+│   └── architecture_diagram.png
+│
+└── README.md

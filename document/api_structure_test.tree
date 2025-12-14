@@ -1,0 +1,47 @@
+#=== tested: ✅ | untested: ✖ ==================================== (input) | [output] | {parameter} | <allowed> ===#
+
+ api                          # Root endpoint
+├──  auth                          # Auth endpoints
+│   ├──  POST /register                # User Registration             ✅ (name, email, password) | [id, name, email]
+│   ├──  POST /login                   # User Login                    ✅ (email, password) | [access_token, user_id, name]
+│
+├──  users                         # User management
+│   ├──  GET /                        # Get All Users                 ✅ [id, name, email, role]
+│   ├──  GET /{user_id}               # Get User by ID                ✅ [id, name, email, role]
+│   ├──  POST /                       # Create User                   ✅ (name, email, password, address, role) | [id, name, email]
+│   ├──  PUT /{user_id}               # Update User                   ✅ (?name, ?email, ?address, ?role) | [id, name, email]
+│   └──  DELETE /{user_id}            # Delete User                   ✅ <success message>
+│
+├──  products                     # Product endpoints
+│   ├──  GET /                        # List All Products             ✅ {search?, category?, page?, limit?} | [products]
+│   ├──  GET /{product_id}            # Get Product Details           ✅ | [id, name, description, category_id, price, stock, image_url]
+│   ├──  POST /                       # Create Product                ✅ (name, description, category_id, price, stock, image_url) <admin> | [id, name]
+│   ├──  PUT /{product_id}            # Update Product                ✅ (?name, ?description, ?category_id, ?price, ?stock, ?image_url) <admin> | [id, name]
+│   └──  DELETE /{product_id}         # Delete Product                ✅ <success message> <admin>
+│
+├──  categories                   # Category endpoints
+│   ├──  GET /                        # List Categories               ✅ [id, name, description]
+│   ├──  GET /{category_id}           # Get Category Details          ✅ [id, name, description]
+│   ├──  POST /                       # Create Category               ✅ (name, description) <admin> | [id, name]
+│   ├──  PUT /{category_id}           # Update Category               ✅ (?name, ?description) <admin> | [id, name]
+│   └──  DELETE /{category_id}        # Delete Category               ✅ <success message> <admin>
+│
+├──  cart                         # Cart / Order Items
+│   ├──  GET /                        # Get Current Cart Items        ✅ [items] <customer>
+│   ├──  POST /add                    # Add Item to Cart              ✅ (order_id, product_id, quantity, price) | [item_id, order_id]
+│   ├──  PUT /update/{item_id}        # Update Cart Item Quantity     ✅ (quantity) | [item_id, quantity]
+│   └──  DELETE /remove/{item_id}     # Remove Item from Cart         ✅ <success message>
+│
+├──  orders                        # Order endpoints
+│   ├──  POST /                        # Create New Order             ✅ (user_id, total_amount) | [id, user_id]
+│   ├──  GET /                        # List All Orders               ✅ [orders] <customer>
+│   ├──  GET /{order_id}               # Get Order by ID               ✅ [id, user_id, total_amount, status]
+│   └──  PUT /status/{order_id}        # Update Order Status           ✅ (status) | [id, status]
+│
+├──  payments                      # Payment endpoints
+│   ├──  POST /                        # Create Payment                 (order_id, amount, method, status?) | [id, order_id]
+│   └──  PUT /{payment_id}             # Update Payment Status          (status) | [id, status]
+│
+└──  inventory                     # Inventory endpoints
+    ├──  GET /{product_id}            # Get Stock for Product         ✅[product_id, quantity]
+    └──  POST /update                  # Update Stock                  ✅(product_id, qty_change) | [product_id, quantity]

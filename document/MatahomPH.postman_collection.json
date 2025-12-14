@@ -1,0 +1,251 @@
+{
+  "info": {
+    "name": "MatahomPH API",
+    "_postman_id": "b12c345d-6789-4abc-def0-123456789abc",
+    "description": "Postman collection for Matahom: Beauty and Personal Care Store API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/register",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "5000",
+              "path": ["api","register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/login",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "5000",
+              "path": ["api","login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:5000/api/users/"
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:5000/api/users/1"
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\",\n  \"password\": \"123456\",\n  \"address\": \"123 Street\",\n  \"role\": \"customer\"\n}"
+            },
+            "url": "http://127.0.0.1:5000/api/users/"
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Smith\",\n  \"address\": \"456 Avenue\"\n}"
+            },
+            "url": "http://127.0.0.1:5000/api/users/1"
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:5000/api/users/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/products/" }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/products/1" }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category_id\": 1,\n  \"name\": \"Lipstick\",\n  \"description\": \"Red color\",\n  \"price\": 15.50,\n  \"stock\": 100,\n  \"image_url\": \"http://example.com/lipstick.png\"\n}"
+            },
+            "url": "http://127.0.0.1:5000/api/products/"
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"price\": 17.00,\n  \"stock\": 90\n}"},
+            "url": "http://127.0.0.1:5000/api/products/1"
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": { "method": "DELETE", "url": "http://127.0.0.1:5000/api/products/1" }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/categories/" }
+        },
+        {
+          "name": "Get Category by ID",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/categories/1" }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"Makeup\",\n  \"description\": \"All makeup products\"\n}"},
+            "url": "http://127.0.0.1:5000/api/categories/"
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw":"{\n  \"name\":\"Cosmetics\"\n}"},
+            "url": "http://127.0.0.1:5000/api/categories/1"
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": { "method": "DELETE", "url": "http://127.0.0.1:5000/api/categories/1" }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw":"{\n  \"user_id\": 1,\n  \"total_amount\": 50.00,\n  \"status\": \"pending\",\n  \"shipping_address\": \"123 Street\"\n}"},
+            "url": "http://127.0.0.1:5000/api/orders/"
+          }
+        },
+        {
+          "name": "Get Order by ID",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/orders/1" }
+        },
+        {
+          "name": "Get Orders by User",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/orders/user/1" }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw":"{\n  \"status\": \"shipped\"\n}"},
+            "url": "http://127.0.0.1:5000/api/orders/status/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Get Product Stock",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/inventory/1" }
+        },
+        {
+          "name": "Update Stock",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw":"{\n  \"product_id\": 1,\n  \"qty_change\": 10\n}"},
+            "url": "http://127.0.0.1:5000/api/inventory/update"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Payment",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw":"{\n  \"order_id\": 1,\n  \"amount\": 50.00,\n  \"method\": \"GCash\",\n  \"status\": \"pending\"\n}"},
+            "url": "http://127.0.0.1:5000/api/payments/"
+          }
+        },
+        {
+          "name": "Get Payment by Order",
+          "request": { "method": "GET", "url": "http://127.0.0.1:5000/api/payments/1" }
+        }
+      ]
+    }
+  ]
+}
